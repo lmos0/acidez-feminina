@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Acidez Feminina - Login</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -51,27 +51,26 @@
     </div>
 
     <script>
-        // Função para lidar com o envio do formulário
+        
         function handleLoginSubmit(event) {
-            event.preventDefault(); // Impede o envio padrão do formulário
+            event.preventDefault(); 
             
-            // Obtemos os valores do formulário
+            
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
             
-            // Criamos o objeto de dados para enviar
             const loginData = {
                 email: email,
                 password: password
             };
             
-            // Envia os dados para a API
+           
             sendLoginData(loginData);
         }
         
-        // Função para enviar dados de login para a API
+        
         function sendLoginData(data) {
-            // URL do seu endpoint de login (ajuste conforme necessário)
+            
             const apiUrl = 'https://acidez-feminina.onrender.com/login';
             
             fetch(apiUrl, {
@@ -81,7 +80,7 @@
                     'Accept': 'application/json'
                 },
                 body: JSON.stringify(data),
-                credentials: 'include'  // Enviar cookies na requisição
+                credentials: 'include'  // Para enviar cookies
             })
             .then(response => {
                 if (!response.ok) {
@@ -91,18 +90,18 @@
                 return response.json();
             })
             .then(data => {
-                // O redirecionamento será tratado pelo backend, então não é necessário aqui
+                
                 console.log('Login bem-sucedido:', data);
-                 window.location.href = '/search'; // O redirecionamento já é feito no backend
+                 window.location.href = '/search'; 
             })
             .catch(error => {
-                // Se ocorrer erro, mostramos a mensagem para o usuário
+            
                 console.error('Erro no login:', error);
                 alert('Falha no login. Verifique suas credenciais e tente novamente.');
             });
         }
         
-        // Conectando a função de submit ao evento do formulário
+    
         document.getElementById('loginForm').addEventListener('submit', handleLoginSubmit);
     </script>
     
