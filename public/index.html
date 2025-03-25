@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container" id="loginContainer">
+        <div class="login-box">
+            <div class="login-header">
+                <img src="https://dcdn-us.mitiendanube.com/stores/001/403/059/themes/common/logo-1296667581-1607006784-471ab34f20f2fcd78820d538f209a1f71607006785-480-0.webp" alt="Logo" class="login-logo">
+                <h2>Oi, de novo!</h2>
+                <p class="login-subtitle">Faça login para utilizar a ferramenta</p>
+            </div>
+            
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <div class="input-wrapper">
+                        <input type="email" id="email" name="email" placeholder="exemplo@acidezfeminina.com.br" required>
+                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" name="password" placeholder="••••••••" required>
+                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 15a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                            <path d="M21 12c-1.2 2.4-3.5 4-6 4s-4.8-1.6-6-4c1.2-2.4 3.5-4 6-4s4.8 1.6 6 4"/>
+                            <path d="M3 12c1.2 2.4 3.5 4 6 4s4.8-1.6 6-4c-1.2-2.4-3.5-4-6-4s-4.8 1.6-6 4"/>
+                        </svg>
+                    </div>
+                </div>
+    
+                <button type="submit" class="login-button">
+                    Continuar
+                    <svg class="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
+                
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Função para lidar com o envio do formulário
+        function handleLoginSubmit(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+            
+            // Obtemos os valores do formulário
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            
+            // Criamos o objeto de dados para enviar
+            const loginData = {
+                email: email,
+                password: password
+            };
+            
+            // Envia os dados para a API
+            sendLoginData(loginData);
+        }
+        
+        // Função para enviar dados de login para a API
+        function sendLoginData(data) {
+            // URL do seu endpoint de login (ajuste conforme necessário)
+            const apiUrl = 'http://localhost:3000/login';
+            
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(data),
+                credentials: 'include'  // Enviar cookies na requisição
+            })
+            .then(response => {
+                if (!response.ok) {
+                    console.error('Erro na requisição:', response);
+                    throw new Error('Credenciais inválidas');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // O redirecionamento será tratado pelo backend, então não é necessário aqui
+                console.log('Login bem-sucedido:', data);
+                 window.location.href = '/search'; // O redirecionamento já é feito no backend
+            })
+            .catch(error => {
+                // Se ocorrer erro, mostramos a mensagem para o usuário
+                console.error('Erro no login:', error);
+                alert('Falha no login. Verifique suas credenciais e tente novamente.');
+            });
+        }
+        
+        // Conectando a função de submit ao evento do formulário
+        document.getElementById('loginForm').addEventListener('submit', handleLoginSubmit);
+    </script>
+    
+    
+</body>
+</html>

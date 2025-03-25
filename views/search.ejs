@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca LinkedIn</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+           <a href="/"><img src="https://dcdn-us.mitiendanube.com/stores/001/403/059/themes/common/logo-1296667581-1607006784-471ab34f20f2fcd78820d538f209a1f71607006785-480-0.webp" alt=""></a> 
+        </div>
+       
+        <h1>Pesquisa de Perfil no LinkedIn </h1>
+      
+
+        <form id="searchForm">
+         
+
+            <div class="form-group">
+                <label for="company">Empresa:</label>
+                <input type="text" id="company" name="company" placeholder="Digite o nome da empresa" required>
+            </div>
+
+            <div class="form-group">
+                <label for="title1">Cargo</label>
+                <input type="text" id="title1" name="title1" placeholder="Cargo a ser buscado" required>
+            </div>
+
+            <div class="form-group">
+                <label for="title2">Cargo 2 (Opcional):</label>
+                <input type="text" id="title2" name="title2" placeholder="Cargo adicional a ser buscado">
+            </div>
+
+
+            <button type="submit">Pesquisar</button>
+        </form>
+
+        <div id="result" class="result">
+            <h3>Resultados encontrados:</h3>
+            <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th>Título do Perfil</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <div class="export-container">
+                <button id="exportBtn">Criar Planilha</button>
+            </div>
+        </div>
+    </div>
+
+        
+</body>
+
+<script>
+    document.getElementById('searchForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    // Hide export button when a new search starts
+    document.getElementById('exportBtn').style.display = 'none';
+    
+    // Show loading indicator
+    const tableBody = document.querySelector("#resultsTable tbody");
+    tableBody.innerHTML = tableBody.innerHTML = `
+  <tr>
+    <td colspan="2">
+      <div class="spinner-container">
+        <div class="spinner"></div>
+        <div>Buscando...</div>
+      </div>
+    </td>
+  </tr>`
+    
+    const company = document.getElementById('company').value.trim();
+    const title1 = document.getElementById('title1').value.trim();
+    const title2 = document.getElementById('title2').value.trim();
+   
+    try {
+        // Call the backend API
+        const response = await fetch('http://localhost:3000/search', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ company, title1, title2 })
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(data.message || 'Failed to retrieve results');
+        }
+        
+        tableBody.innerHTML = "";
+        
+        if (data.success && data.results.length > 0) {
+            // Store results for later export
+            window.searchResults = data.results;
+            
+            data.results.forEach(item => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${item.title}</td>
+                    <td><a href="${item.link}" target="_blank">${item.link}</a></td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            // Show export button if results are found
+            document.getElementById('exportBtn').style.display = 'block';
+        } else {
+            tableBody.innerHTML = "<tr><td colspan='2'>No results found</td></tr>";
+        }
+
+        document.getElementById('result').style.display = 'block';
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        tableBody.innerHTML = `<tr><td colspan='2'>Error: ${error.message}</td></tr>`;
+    }
+});
+
+
+ // Export to CSV functionality
+ document.getElementById('exportBtn').addEventListener('click', function () {
+      if (!window.searchResults || window.searchResults.length === 0) {
+        alert('Sem resultados para exportar');
+        return;
+      }
+
+      // Build CSV content
+      let csvContent = 'Title,Link\n';
+      window.searchResults.forEach(item => {
+        // Enclose fields in quotes to avoid issues with commas in text
+        csvContent += `"${item.title}","${item.link}"\n`;
+      });
+
+      // Create a Blob from the CSV content
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+    link.setAttribute('download', `${document.getElementById('company').value.trim()}_linkedin_profiles.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+
+</script>
+</html>

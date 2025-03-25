@@ -1,0 +1,432 @@
+/* Updated CSS */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f8f9fa;
+  color: #2d3439;
+}
+
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  background: white;
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.header img {
+  max-width: 180px;
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  color: #2d3439;
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  letter-spacing: -0.5px;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #4a5056;
+  font-size: 0.9rem;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 0.875rem;
+  border: 2px solid #e3e8ee;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #6E46AE;
+  box-shadow: 0 0 0 3px rgba(110, 70, 174, 0.1);
+}
+
+button {
+  padding: 0.875rem 1.75rem;
+  background: #6E46AE;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+button:hover {
+  background: #5d3a9b;
+  transform: translateY(-1px);
+}
+
+.result {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+th, td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #f1f3f5;
+}
+
+th {
+  background: #f8f9fa;
+  color: #4a5056;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Replace the existing #exportBtn styles with this */
+#exportBtn {
+  display: none;
+  margin-top: 1.5rem;
+  background: #4CAF50;
+  width: auto;
+  margin-left: auto;
+  display: block;
+  transition: all 0.2s ease;
+}
+
+#exportBtn:hover {
+  background: #43a047;
+  transform: translateY(-1px);
+}
+
+/* Add this to create proper spacing */
+.result h3 {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+/* Optional: Add a container for the button if needed */
+.export-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+      margin: 1rem;
+      padding: 1.5rem;
+  }
+  
+  h1 {
+      font-size: 1.5rem;
+  }
+  
+  input[type="text"] {
+      padding: 0.75rem;
+  }
+}
+
+/* Updated Login CSS */
+.login-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(248, 249, 250, 0.98) 0%, rgba(245, 247, 250, 0.98) 100%);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.login-box {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 440px;
+  animation: slideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.login-logo {
+  max-width: 140px;
+  margin-bottom: 1.75rem;
+  filter: drop-shadow(0 2px 4px rgba(110, 70, 174, 0.1));
+}
+
+.login-header h2 {
+  color: #2d3439;
+  font-weight: 700;
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.25px;
+}
+
+.login-subtitle {
+  color: #6c757d;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: #a0aec0;
+  pointer-events: none;
+  transition: color 0.2s ease;
+}
+
+input[type="email"],
+input[type="password"] {
+  padding: 0.875rem 1rem;
+  padding-right: 2.75rem;
+  border: 2px solid #e3e8ee;
+  background: #f8f9fa;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+  background: white;
+  border-color: #6E46AE;
+  box-shadow: 0 0 0 4px rgba(110, 70, 174, 0.15);
+}
+
+.login-button {
+  position: relative;
+  padding: 1rem 1.5rem;
+  background: #6E46AE;
+  color: white;
+  font-weight: 600;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.login-button:hover {
+  background: #5d3a9b;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(110, 70, 174, 0.25);
+}
+
+.button-icon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2.5px;
+}
+
+.login-divider {
+  position: relative;
+  margin: 2rem 0;
+  color: #a0aec0;
+  text-align: center;
+}
+
+.login-divider span {
+  position: relative;
+  padding: 0 1rem;
+  background: white;
+  z-index: 1;
+  font-size: 0.9rem;
+}
+
+.login-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #e3e8ee;
+  transform: translateY(-50%);
+}
+
+.footer-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.875rem;
+  border: 2px solid #e3e8ee;
+  border-radius: 10px;
+  color: #2d3439;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.footer-link:hover {
+  border-color: #6E46AE;
+  background: rgba(110, 70, 174, 0.03);
+  transform: translateY(-1px);
+}
+
+.footer-icon {
+  width: 18px;
+  height: 18px;
+  color: #6E46AE;
+}
+
+.footer-links {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.text-link {
+  color: #6c757d;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.text-link:hover {
+  color: #6E46AE;
+}
+
+.link-divider {
+  color: #cbd5e0;
+}
+
+@keyframes slideUp {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Password toggle feature */
+.password-toggle {
+  position: absolute;
+  right: 2.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #a0aec0;
+}
+
+/* Add to CSS */
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem 0;
+}
+
+.spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #6E46AE;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 401 Error Page Styles */
+.error-content {
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.error-icon {
+  margin-bottom: 1.5rem;
+}
+
+.error-code {
+  font-size: 4rem;
+  color: #6E46AE;
+  margin: 1rem 0;
+  line-height: 1;
+}
+
+.error-description {
+  color: #6c757d;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+}
+
+.login-button {
+  margin-top: 2rem;
+  width: auto;
+  padding: 1rem 2.5rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .error-code {
+      font-size: 3rem;
+  }
+  
+  .error-description {
+      font-size: 1rem;
+  }
+  
+  .login-button {
+      width: 100%;
+  }
+}
