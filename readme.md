@@ -75,3 +75,9 @@ projeto_acidez-feminina/
 ## Licença
 Este projeto está sob a licença MIT.
 
+
+![image](https://github.com/user-attachments/assets/2419ed47-3289-4969-8bd6-11d0fd1be7b4)
+![image](https://github.com/user-attachments/assets/bdc9bca1-56ca-4e3e-9ad7-5e4a1b92f4e5)
+
+
+
